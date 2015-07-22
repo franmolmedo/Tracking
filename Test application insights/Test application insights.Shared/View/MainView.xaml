@@ -1,0 +1,46 @@
+﻿<common:BasePage
+    x:Class="Test_application_insights.View.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:common="using:Test_application_insights.Common"
+    mc:Ignorable="d"
+    DataContext="{Binding MainViewModel, Mode=OneWay, Source={StaticResource Locator}}">
+
+    <Page.Resources>
+        <DataTemplate x:Name="ContactListDataTemplate">
+            <StackPanel>
+                <TextBlock Text="{Binding Surname}" FontSize="20"></TextBlock>
+                <TextBlock Text="{Binding Name}" FontSize="20"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Add" Label="Add Contact" Command="{Binding AddContactCommand}">
+            </AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">   
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Center" FontSize="50" Text="CONTACTS" Margin="30"></TextBlock>
+        <ListView   Grid.Row="1"
+                    ItemsSource="{Binding Contacts}"
+                    ItemTemplate="{StaticResource ContactListDataTemplate}"
+                    IsItemClickEnabled="True"
+                    IsHoldingEnabled="False"
+                    HorizontalAlignment="Center">
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="ItemClick">
+                    <core:InvokeCommandAction Command="{Binding ContactSelectedCommand}"/>
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>        
+        </ListView>
+    </Grid>
+</common:BasePage>

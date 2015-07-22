@@ -1,0 +1,32 @@
+﻿<common:BasePage
+    x:Class="Test_application_insights.View.ContactDetailsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:Test_application_insights.Common"
+    mc:Ignorable="d"
+    DataContext="{Binding ContactDetailsViewModel, Mode=OneWay, Source={StaticResource Locator}}">
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding GoBackCommand}" Style="{StaticResource NavigationBackButtonNormalStyle}"/>
+            <TextBlock Grid.Column="0" Grid.ColumnSpan="2"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="50" Text="CONTACT DETAILS" Margin="30"></TextBlock>
+        </Grid>
+        
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" >
+            <TextBlock Text="{Binding Contact.Name}" FontSize="30"></TextBlock>
+            <TextBlock Text="{Binding Contact.Surname}" FontSize="30"></TextBlock>
+            <TextBlock Text="{Binding Contact.Address}" FontSize="30"></TextBlock>
+            <TextBlock Text="{Binding Contact.PhoneNumber}" FontSize="30"></TextBlock>
+        </StackPanel>
+    </Grid>
+</common:BasePage>
